@@ -7,7 +7,10 @@ const prisma = new PrismaClient()
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+    origin: process.env.FRONTEND_URL || '*',
+    credentials: true
+}))
 app.use(express.json())
     
  
@@ -78,4 +81,7 @@ app.delete('/usuarios/:id', async(req,res) =>{
 
 })
 
-app.listen(3000)
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
+});
