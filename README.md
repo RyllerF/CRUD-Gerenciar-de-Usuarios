@@ -1,2 +1,0 @@
-﻿# CRUD---Gerenciador-de-Usuarios
-
