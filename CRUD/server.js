@@ -7,13 +7,20 @@ const prisma = new PrismaClient()
 
 const app = express()
 
-app.use(cors({
-    origin: process.env.FRONTEND_URL || '*',
-    credentials: true
-}))
+app.use(cors())
 app.use(express.json())
+
+// Rota de health check
+app.get('/', (req, res) => {
+    res.json({ 
+        message: '🚀 API CRUD está funcionando!',
+        status: 'online',
+        endpoints: {
+            usuarios: '/usuarios'
+        }
+    })
+})
     
- 
 app.post('/usuarios', async (req, res) => {
     try{
         await prisma.user.create({
@@ -81,7 +88,7 @@ app.delete('/usuarios/:id', async(req,res) =>{
 
 })
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
-    console.log(`Servidor rodando na porta ${PORT}`);
-});
+    console.log(`🚀 Servidor rodando na porta ${PORT}`)
+})
